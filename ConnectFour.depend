@@ -1,0 +1,42 @@
+# depslib dependency file v1.0
+1322719428 source:c:\codeblocksprojects\connectfour\board\cell.cpp
+	"Cell.h"
+
+1322714670 c:\codeblocksprojects\connectfour\board\cell.h
+	<iostream>
+	<SFML/Graphics.hpp>
+
+1322705047 source:c:\codeblocksprojects\connectfour\board\check\check.cpp
+	"Check.h"
+
+1322705047 c:\codeblocksprojects\connectfour\board\check\check.h
+
+1322707718 source:c:\codeblocksprojects\connectfour\board\piece\piece.cpp
+	"Piece.h"
+
+1322707718 c:\codeblocksprojects\connectfour\board\piece\piece.h
+	<SFML/Graphics.hpp>
+
+1322717767 source:c:\codeblocksprojects\connectfour\control\control.cpp
+	"Control.h"
+
+1322717713 c:\codeblocksprojects\connectfour\control\control.h
+	<SFML/Graphics.hpp>
+
+1322718781 source:c:\codeblocksprojects\connectfour\main.cpp
+	<iostream>
+	<SFML/Graphics.hpp>
+	"Board/Board.h"
+	"Control/Control.h"
+
+1322718748 c:\codeblocksprojects\connectfour\board\board.h
+	<iostream>
+	<vector>
+	<SFML/Graphics.hpp>
+	"Cell.h"
+	"Check/Check.h"
+	"Piece/Piece.h"
+
+1322719167 source:c:\codeblocksprojects\connectfour\board\board.cpp
+	"Board.h"
+
