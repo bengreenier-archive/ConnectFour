@@ -14,6 +14,7 @@ class Cell : sf::Shape
         sf::Shape   Drawer();
         sf::Shape   Boxer();
         bool        IsInsideDimensions(int x,int y);
+        int Player;
     protected:
     private:
         bool            isFill;
@@ -23,6 +24,7 @@ class Cell : sf::Shape
         sf::Shape       Filler;
         sf::Shape       Square;
         int x,y,x2,y2;
+
 };
 
 #endif // CELL_H

@@ -25,6 +25,8 @@ int main()
     // Start game loop
     while (Window.IsOpened())
     {
+        // Process Checks
+        Game.ExecuteChecks();
         // Process events
         sf::Event Event;
         while (Window.GetEvent(Event))

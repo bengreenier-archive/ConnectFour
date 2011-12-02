@@ -15,14 +15,22 @@ class Board
         void Drawer(sf::RenderWindow& Window);
         std::vector < std::vector<Cell*> > Structure;       //This allows the board to ever expand, though, it current'y doesn't need to.
         void FillFromVector(sf::Vector2f in);
+        void ExecuteChecks();
+        bool IsGameover();
+        int Winner();
+        bool CellIsValid(int x,int y);
 
     protected:
+
     private:
         void PushARow();                                    //Pushes a row of new Cells into Structure
         int BoardTopLeft;
         int CellSize;
         int TotalCellsDrawn;
         int TotalRowsDrawn;
+        Check   Checker;
+
+        int WinnerCount;
 
 
 
