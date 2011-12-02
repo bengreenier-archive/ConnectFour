@@ -4,7 +4,7 @@
 Cell::Cell(int x,int y,int x2,int y2)
 {
     isFill=false;
-    Player=0;
+    Player=10;
 
     Cell::x=x;
     Cell::y=y;

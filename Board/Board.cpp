@@ -139,25 +139,14 @@ void Board::FillFromVector(sf::Vector2f in)
         if (Structure[in.y+1][in.x]->IsFilled())
             Structure[in.y][in.x]->Fill();
         else
-            {
-                    if (CellIsValid(in.x,in.y)){
-                        for (int i=0;i<=Structure[in.y].size();i++){
-                            if (CellIsValid(in.x,in.y+i)){
-                                if ((Structure[in.y+i][in.x]->IsFilled())){
-                                        Structure[in.y+i-1][in.x]->Fill();
-                                }
-                            }
-                        }
-                    }
-
-            }
+            return;
 
     }else if ((in.x==-1)&&(in.y==-1)){return;
     }else{
     std::cout<<"SEMATICAL ERROR WITH PROGRAM. CONTACT DEV.\n";
     }
 
-
+    std::cout<<"IsGameover for this cell returned: "<<IsGameover(in.x,in.y)<<"\n";
         Control::Get()->SetTurn();
 
     return;
@@ -191,114 +180,110 @@ void Board::ExecuteChecks()
 }
 
 
-bool Board::IsGameover()
+bool Board::IsGameover(int incomingX,int incomingY)
 {
-    /*
-    int tally[8]={0,0,0,0,0,0,0,0};//used for seeing if a direction is valid
-    sf::Vector2i tally_vectors[8];//used for keeping t
+    int INIT_X=incomingX,INIT_Y=incomingY,AMOUNTTOWIN=4;
+    int checkX =    INIT_X;//
+    int checkY =    INIT_Y;//
+    int orientX =   0;//
+    int orientY =   0;//
+    int counter =   1;//to count intself as a slot
 
-    for (int y=0;y<Structure.size();y++)
-        for (int x=0;x<Structure[y].size();x++)
-        {
-            if (Structure[y][x]->IsFilled())
+    std::cout<<"Incoming Coords are "<<INIT_X<<","<<INIT_Y<<"\n";
+
+    if (!CellIsValid(INIT_X,INIT_Y))
+    {
+        std::cout<<"\tCell is Reading as invalid\n";
+        return false;
+    }
+
+    for (int dir=0; dir<8; dir++){
+
+            std::cout<<"\t\tDirection is "<<dir<<"\n";
+
+        switch(dir){
+            case 0:
+                orientX = -1;
+                orientY = -1;
+                break;
+            case 1:
+                orientX = 0;
+                orientY = -1;
+                break;
+            case 2:
+                orientX = 1;
+                orientY = -1;
+                break;
+            case 3:
+                orientX = 1;
+                orientY = 0;
+                break;
+            case 4:
+                orientX = 1;
+                orientY = 1;
+                break;
+            case 5:
+                orientX = 0;
+                orientY = 1;
+                break;
+            case 6:
+                orientX = -1;
+                orientY = 1;
+                break;
+            case 7:
+                orientX = -1;
+                orientY = 0;
+                break;
+            }
+
+            checkX =    INIT_X;
+            checkY =    INIT_Y;
+            counter=    1;
+
+            for (int i=0;i<AMOUNTTOWIN;i++)
+            {
+                checkX+=orientX;
+                checkY+=orientY;
+                if (CellIsValid(checkX,checkY))
                 {
-                    for (int i=1;i<=2;i++)
+                    std::cout<<"\t\t  Checking Cell is valid, @ "<<checkX<<","<<checkY<<"\n";
+                    if (Structure[checkY][checkX]->IsFilled())
                     {
-                        if (CellIsValid(x+i,y))
+                        std::cout<<"\t\t\tCell is Filled\n";
+                        std::cout<<"\t\t\t  Is "<<Structure[INIT_Y][INIT_X]->Player<<" == "<<Structure[checkY][checkX]->Player<<" ?\n";
+                        if (Structure[INIT_Y][INIT_X]->Player==Structure[checkY][checkX]->Player)
                         {
-                            if ((Structure[y][x+i]->IsFilled())&&(Structure[y][x+i]->Player==Structure[y][x]->Player))
-                            {
-                                tally[0]++;
-                                tally_vectors[0].x=x+i;
-                                tally_vectors[0].y=y;
-                            }
+                                counter++;
+                                std::cout<<"\t\t\t\tCell is Of Same Color,Counter="<<counter<<"\n";
+
+                                if (counter == AMOUNTTOWIN)
+                                {
+                                        WinnerCount = Structure[INIT_Y][INIT_X]->Player;//set who won war winners color
+                                        std::cout<<"innerds";
+                                        break;
+
+                                }else{break;}
 
                         }
-                        if (CellIsValid(x,y+i))
-                        {
-                            if ((Structure[y+i][x]->IsFilled())&&(Structure[y+i][x]->Player==Structure[y][x]->Player))
-                            {
-                                tally[1]++;
-                                tally_vectors[1].x=x;
-                                tally_vectors[1].y=y+i;
-                            }
-                        }
-                        if (CellIsValid(x+i,y+i))
-                        {
-                            if ((Structure[y+i][x+i]->IsFilled())&&(Structure[y+i][x+i]->Player==Structure[y][x]->Player))
-                            {
-                                tally[2]++;
-                                tally_vectors[2].x=x+i;
-                                tally_vectors[2].y=y+i;
-                            }
-                        }
-                        if (CellIsValid(x-i,y-i))
-                        {
-                            if ((Structure[y-i][x-i]->IsFilled())&&(Structure[y-i][x-i]->Player==Structure[y][x]->Player))
-                            {
-                                tally[3]++;
-                                tally_vectors[3].x=x-i;
-                                tally_vectors[3].y=y-i;
-                            }
-                        }
-                        if (CellIsValid(x-i,y))
-                        {
-                            if ((Structure[y][x-i]->IsFilled())&&(Structure[y][x-i]->Player==Structure[y][x]->Player))
-                            {
-                                tally[4]++;
-                                tally_vectors[4].x=x-i;
-                                tally_vectors[4].y=y;
-                            }
-                        }
-                        if (CellIsValid(x,y-i))
-                        {
-                            if ((Structure[y-i][x]->IsFilled())&&(Structure[y-i][x]->Player==Structure[y][x]->Player))
-                            {
-                                tally[5]++;
-                                tally_vectors[5].x=x;
-                                tally_vectors[5].y=y-i;
-                            }
-                        }
-                        if (CellIsValid(x-i,y+i))
-                        {
-                            if ((Structure[y+i][x-i]->IsFilled())&&(Structure[y+i][x-i]->Player==Structure[y][x]->Player))
-                            {
-                                tally[6]++;
-                                tally_vectors[6].x=x-i;
-                                tally_vectors[6].y=y+i;
-                            }
-                        }
-                        if (CellIsValid(x+i,y-i))
-                        {
-                            if ((Structure[y-i][x+i]->IsFilled())&&(Structure[y-i][x+i]->Player==Structure[y][x]->Player))
-                            {
-                                tally[0]++;
-                                tally_vectors[0].x=x+i;
-                                tally_vectors[0].y=y-i;
-                            }
-                        }
-                    }
-
-                    //then scan tally to see if a direction contains 4
-                    for (int i=0;i<8;i++)
-                        if (tally[i]==4){WinnerCount=Structure[tally_vectors[i].y][tally_vectors[i].x]->Player; std::cout<<tally_vectors[i].x<<","<<tally_vectors[i].x<<"\n"; return true;}
+                    }else{std::cout<<"\t\t\tNo. Empty Cell.\n";}
 
                 }
+            }
+
+
         }
 
-    return false;*/
 
 
-    int tempx,tempy;
-    tempx=2;tempy=2;//just for testing
-    return false;
+return false;
 }
+
 
 bool Board::CellIsValid(int x,int y)
 {
 
-    if (x<=Structure.size())
-    if ((x>=0)&&(y>=0)&&(y<Structure[y].size()))
+    if (y<Structure.size())
+    if ((x>=0)&&(y>=0)&&(x<Structure[y].size()))
     {
         //std::cout<<x<<","<<y<<"=True\n";
             return true;
@@ -315,9 +300,9 @@ bool Board::CellIsValid(int x,int y)
 int Board::Winner()
 {
     //IsGameover has issues
-    if (IsGameover())
+    //if (IsGameover(0,0))
     {
-        return WinnerCount;
+        //return WinnerCount;
         //std::cout<<"Game is over..\n";
     }
 

@@ -40,6 +40,7 @@ int main()
             if (Event.Type==sf::Event::MouseButtonPressed)
             {
                     Game.FillFromVector(Game.clickToPosition(InputStream.GetMouseX(),InputStream.GetMouseY()));
+
             }
 
         }

@@ -1,0 +1,2 @@
+So, the counter in the IsGameover() path checker isn't functioning correctly,
+though, the rest does.

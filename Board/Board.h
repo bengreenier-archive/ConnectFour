@@ -16,7 +16,7 @@ class Board
         std::vector < std::vector<Cell*> > Structure;       //This allows the board to ever expand, though, it current'y doesn't need to.
         void FillFromVector(sf::Vector2f in);
         void ExecuteChecks();
-        bool IsGameover();
+        bool IsGameover(int incomingX,int incomingY);
         int Winner();
         bool CellIsValid(int x,int y);
 

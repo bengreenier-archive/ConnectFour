@@ -42,7 +42,6 @@
 		<Unit filename="Control\Control.cpp" />
 		<Unit filename="Control\Control.h" />
 		<Unit filename="Main.cpp" />
-		<Unit filename="README" />
 		<Extensions>
 			<code_completion />
 			<debugger />
