@@ -25,13 +25,13 @@
 	<iostream>
 	<SFML/Graphics.hpp>
 
-1322799919 source:c:\codeblocksprojects\connectfour\main.cpp
+1322843107 source:c:\codeblocksprojects\connectfour\main.cpp
 	<iostream>
 	<SFML/Graphics.hpp>
 	"Board/Board.h"
 	"Control/Control.h"
 
-1322800378 c:\codeblocksprojects\connectfour\board\board.h
+1323036980 c:\codeblocksprojects\connectfour\board\board.h
 	<iostream>
 	<vector>
 	<SFML/Graphics.hpp>
@@ -39,7 +39,7 @@
 	"Check/Check.h"
 	"Piece/Piece.h"
 
-1322802867 source:c:\codeblocksprojects\connectfour\board\board.cpp
+1323037220 source:c:\codeblocksprojects\connectfour\board\board.cpp
 	"Board.h"
 	"../Control/Control.h"
 

@@ -39,7 +39,9 @@ int main()
 
             if (Event.Type==sf::Event::MouseButtonPressed)
             {
-                    Game.FillFromVector(Game.clickToPosition(InputStream.GetMouseX(),InputStream.GetMouseY()));
+                    Game.FillFromVector(Game.DropToBottom(Game.clickToPosition(InputStream.GetMouseX(),InputStream.GetMouseY())));
+                    if (Game.IsGameover(Game.DropToBottom(Game.clickToPosition(InputStream.GetMouseX(),InputStream.GetMouseY()))))
+                        std::cout<<Game.Winner()<<" Won.\n";
 
             }
 

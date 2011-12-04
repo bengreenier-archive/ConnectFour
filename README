@@ -1,2 +1,12 @@
 So, the counter in the IsGameover() path checker isn't functioning correctly,
 though, the rest does.
+
+
+the IsGameover() can't handle if u do the following:
+                                0 _ 0 0
+                                then
+                                0 0 0 0
+because it takes two opposite directions to complete it
+
+
+also it appears something is wrong with the directions in general. they don't work all the time.
